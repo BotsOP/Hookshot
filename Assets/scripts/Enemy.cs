@@ -6,10 +6,12 @@ public class Enemy : MonoBehaviour, IDamagable
 {
     [SerializeField] private EnemyStats enemyStats;
     private int currentHealth;
+    private Vector3 startingPosition;
 
     void Start()
     {
         currentHealth = enemyStats.maxHealth;
+        startingPosition = transform.position;
     }
 
     public void DealDamage(int damage)
