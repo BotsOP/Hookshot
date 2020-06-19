@@ -19,11 +19,11 @@ public class bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamagable damageable = other.gameObject.GetComponent<IDamagable>();
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && other.GetType() == typeof(CapsuleCollider))
         {
             damageable.DealDamage(10);
         }
-        if (other.gameObject.name != "Player")
+        if (other.gameObject.name != "Player" && other.GetType() != typeof(SphereCollider))
         {
             Destroy(gameObject);
         }
