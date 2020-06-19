@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
@@ -11,28 +12,31 @@ public class Enemy : MonoBehaviour, IDamagable
     public Image healthbarFillImage;
 
     private int currentHealth;
-
-    public Color maxHealthColor;
-    public Color minHealthColor;
-
     public int switchState = 0;
     public float gameTimer;
     public int seconds = 0;
     public Vector3 wanderPos;
-    private State currentState;
-    public GameObject target;
     public bool hasTarget;
     public bool inRange;
     public float rotationSpeed = 5f;
-    RaycastHit hit;
     public float rayCastDis = 10f;
+
+    public Color maxHealthColor;
+    public Color minHealthColor;
+    
+    private State currentState;
+    
+    RaycastHit hit;
+    
     public GameObject bullet;
     public GameObject firePoint;
+    public GameObject target;
 
     public NavMeshAgent agent;
 
     void Start()
     {
+        PlayerController.current.onTargetTrigger += TargetFound;
         currentHealth = enemyStats.maxHealth;
         SetHealthbarUI();
         SetState(new EnemyWander(this));
@@ -40,11 +44,19 @@ public class Enemy : MonoBehaviour, IDamagable
         agent.speed = 2;
     }
 
+    private void TargetFound()
+    {
+        Debug.Log("I received this event name: " + gameObject.name);
+        target = GameObject.Find("Player");
+        hasTarget = true;
+        SetState(new EnemyChase(this));
+    }
+
     void Update()
     {
         CheckIfEnemyInfront();
 
-        if(inRange)
+        if(inRange && target != null)
         {
             Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
@@ -67,6 +79,7 @@ public class Enemy : MonoBehaviour, IDamagable
             hasTarget = true;
             SetState(new EnemyChase(this));
         }
+
     }
 
     public void CheckIfEnemyInfront()
@@ -132,5 +145,10 @@ public class Enemy : MonoBehaviour, IDamagable
     private float CalculateHealthPercentage()
     {
         return ((float)currentHealth / (float)enemyStats.maxHealth) * 100;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerController.current.onTargetTrigger -= TargetFound;
     }
 }

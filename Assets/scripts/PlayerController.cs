@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,8 +12,15 @@ public class PlayerController : MonoBehaviour
     public Vector3 crouchScale = new Vector3(1, 0.5f, 1);
     public Vector3 standScale = new Vector3(1, 1, 1);
 
+    public delegate void FoundTarget();
+    public static PlayerController current;
 
     private Rigidbody rb;
+
+    private void Awake()
+    {
+        current = this;
+    }
 
     private void Start()
     {
@@ -25,9 +34,26 @@ public class PlayerController : MonoBehaviour
         Crouch();
     }
 
+    public event Action onTargetTrigger;
+    public void TargetFound()
+    {
+        if (onTargetTrigger != null)
+            onTargetTrigger();
+    }
+
     private void FixedUpdate()
     {
         Move();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("hit!");
+        if (other.GetType() == typeof(SphereCollider))
+        {
+            Debug.Log("I hit an enemy detection range " + other.gameObject.name);
+            PlayerController.current.TargetFound();
+        }
     }
 
     private void Move()
@@ -67,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void Crouch()
     {
-        Vector3 newScale = transform.localScale;
+        Vector3 newScale;
         
         
         if (Input.GetKey(KeyCode.LeftControl))
