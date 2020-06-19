@@ -16,13 +16,16 @@ public class EnemyWander : State
 
     public override IEnumerator Wander()
     {
-        while (true)
+        while (!_system.hasTarget)
         {
             Vector3 randomPos = new Vector3(Random.Range(-4, 5), 0, Random.Range(-4, 5));
-            _system.agent.SetDestination(_system.transform.position + randomPos);
+            Vector3 playerPos = new Vector3(_system.transform.position.x, _system.transform.position.y, _system.transform.position.z);
+            Vector3 newPos = playerPos + randomPos;
+            //Quaternion targetRotation = Quaternion.LookRotation(newPos - _system.transform.position);
+            //_system.transform.rotation = Quaternion.Slerp(_system.transform.rotation, targetRotation, _system.rotationSpeed * Time.deltaTime);
+            _system.agent.SetDestination(newPos);
             yield return new WaitForSeconds(2f);
-            //_system.SetState(new EnemyChase(_system));
-            _system.Chase();
-        }  
+        }
     }
 }
+

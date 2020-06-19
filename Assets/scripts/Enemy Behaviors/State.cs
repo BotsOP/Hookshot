@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class State
 {
     protected readonly Enemy _system;
-    
+
     public State(Enemy system)
     {
         _system = system;

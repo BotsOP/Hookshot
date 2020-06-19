@@ -22,6 +22,12 @@ public class Enemy : MonoBehaviour, IDamagable
     private State currentState;
     public GameObject target;
     public bool hasTarget;
+    public bool inRange;
+    public float rotationSpeed = 5f;
+    RaycastHit hit;
+    public float rayCastDis = 10f;
+    public GameObject bullet;
+    public GameObject firePoint;
 
     public NavMeshAgent agent;
 
@@ -31,12 +37,59 @@ public class Enemy : MonoBehaviour, IDamagable
         SetHealthbarUI();
         SetState(new EnemyWander(this));
         WanderAround();
+        agent.speed = 2;
+    }
+
+    void Update()
+    {
+        CheckIfEnemyInfront();
+
+        if(inRange)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
+        }
     }
 
     public void SetState(State state)
     {
         currentState = state;
         StartCoroutine(currentState.Start());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            Debug.Log("found player");
+
+            target = other.gameObject;
+            hasTarget = true;
+            SetState(new EnemyChase(this));
+        }
+    }
+
+    public void CheckIfEnemyInfront()
+    {
+        for (int i = -150; i < 150; i += 10)
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow, rayCastDis);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, rayCastDis))
+            {
+                if(hit.collider.gameObject.name == "Player" && !inRange)
+                {
+                    inRange = true;
+                    SetState(new EnemyAttack(this));
+                    Attack();
+                }
+                
+            }
+        }
+    }
+
+    public void fireBullet()
+    {
+        Instantiate(bullet, firePoint.transform.position, transform.rotation);
     }
 
     public void WanderAround()
@@ -63,7 +116,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void CheckIfDead()
     {
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
