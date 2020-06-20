@@ -77,19 +77,6 @@ public class Enemy : MonoBehaviour, IDamagable
         StartCoroutine(currentState.Start());
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "Player")
-        {
-            Debug.Log("found player");
-
-            target = other.gameObject;
-            hasTarget = true;
-            SetState(new EnemyChase(this));
-        }
-
-    }
-
     public Vector3 rayInFront;
     public void CheckIfEnemyInfront()
     {

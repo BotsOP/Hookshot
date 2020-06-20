@@ -428,17 +428,17 @@ PrefabInstance:
     - target: {fileID: 3563384912484068036, guid: 3d82b3421561ada44bb1755024f431c9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3635058618417996559, guid: 3d82b3421561ada44bb1755024f431c9,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3635058618417996559, guid: 3d82b3421561ada44bb1755024f431c9,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3641921177675645595, guid: 3d82b3421561ada44bb1755024f431c9,
         type: 3}
