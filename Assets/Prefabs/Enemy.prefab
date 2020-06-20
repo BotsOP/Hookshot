@@ -143,20 +143,23 @@ MonoBehaviour:
   enemyStats: {fileID: 11400000, guid: ac43d1f76023e9e4f92b818bf42bf540, type: 2}
   healthbarSlider: {fileID: 3856358703849699809}
   healthbarFillImage: {fileID: 2667801799248636153}
-  maxHealthColor: {r: 0.19971518, g: 0.8301887, b: 0.2632767, a: 1}
-  minHealthColor: {r: 0.8301887, g: 0.16055535, b: 0.16055535, a: 1}
   switchState: 0
   gameTimer: 0
   seconds: 0
   wanderPos: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  fireDirection: {x: 0, y: 0, z: 0}
   hasTarget: 0
   inRange: 0
   rotationSpeed: 5
   rayCastDis: 10
+  maxHealthColor: {r: 0.19971518, g: 0.8301887, b: 0.2632767, a: 1}
+  minHealthColor: {r: 0.8301887, g: 0.16055535, b: 0.16055535, a: 1}
   bullet: {fileID: 3281437693424416417, guid: e193a204acd89c748a45930944dd5bcb, type: 3}
   firePoint: {fileID: 1077215720}
+  target: {fileID: 0}
   agent: {fileID: 2094807496456947997}
+  test: {x: 0, y: 90, z: 1}
+  rayInFront: {x: 0, y: 0, z: 0}
 --- !u!195 &2094807496456947997
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -422,15 +425,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Health Bar
       objectReference: {fileID: 0}
-    - target: {fileID: 3635058618417996559, guid: 3d82b3421561ada44bb1755024f431c9,
+    - target: {fileID: 3563384912484068036, guid: 3d82b3421561ada44bb1755024f431c9,
         type: 3}
-      propertyPath: m_AnchorMax.x
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3635058618417996559, guid: 3d82b3421561ada44bb1755024f431c9,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635058618417996559, guid: 3d82b3421561ada44bb1755024f431c9,
+        type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3641921177675645595, guid: 3d82b3421561ada44bb1755024f431c9,
         type: 3}

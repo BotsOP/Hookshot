@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour, IDamagable
         //Debug.DrawRay(transform.position, transform.TransformDirection(test), Color.green, 20);
         CheckIfEnemyInfront();
 
-        if(inRange && target != null)
+        if (inRange && target != null)
         {
             Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
@@ -112,6 +112,8 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void fireBullet()
     {
+        if (target == null)
+            return;
         fireDirection = target.transform.position - firePoint.transform.position;
         Instantiate(bullet, firePoint.transform.position, Quaternion.LookRotation(fireDirection, Vector3.up));
     }

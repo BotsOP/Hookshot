@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         Jump();
         Sprint();
-        Crouch();
+        //Crouch();
     }
 
     public event Action onTargetTrigger;
@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hit!");
         if (other.GetType() == typeof(SphereCollider))
         {
             Debug.Log("I hit an enemy detection range " + other.gameObject.name);
@@ -96,24 +95,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Crouch()
-    {
-        Vector3 newScale;
+    //private void Crouch()
+    //{
+    //    Vector3 newScale;
         
         
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            speed = 1;
-            newScale = crouchScale;
-            transform.localScale = newScale;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            speed = 3;
-            newScale = standScale;
-            transform.localScale = newScale;
-        }
-    }
+    //    if (Input.GetKey(KeyCode.LeftControl))
+    //    {
+    //        speed = 1;
+    //        newScale = crouchScale;
+    //        transform.localScale = newScale;
+    //    }
+    //    if (Input.GetKeyUp(KeyCode.LeftControl))
+    //    {
+    //        speed = 3;
+    //        newScale = standScale;
+    //        transform.localScale = newScale;
+    //    }
+    //}
 
     private bool IsGrounded()
     {

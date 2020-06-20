@@ -46,6 +46,7 @@ public class WeaponHandler : MonoBehaviour
             RaycastHit whatIHit;
             if (Physics.Raycast(cameraTransform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
+                Debug.Log("I hit: " + whatIHit.collider.gameObject.name);
                 FirePoint = GameObject.Find("Firepoint" + currentGun.name).GetComponent<Transform>();
                 Debug.DrawRay(cameraTransform.position, transform.forward, Color.green, 20);
                 fireDirection = whatIHit.point - FirePoint.position;

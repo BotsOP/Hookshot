@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 7770823545549940134}
   - component: {fileID: 7602261102048477934}
   - component: {fileID: 6646374805173265976}
-  - component: {fileID: 2318329496730952218}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -108,19 +107,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2318329496730952218
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400824384046239832}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4994815711055467527
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +118,6 @@ GameObject:
   - component: {fileID: 8880778922795907506}
   - component: {fileID: 7267765654235057100}
   - component: {fileID: 2908134710710547435}
-  - component: {fileID: 1593852045830762238}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -199,19 +184,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1593852045830762238
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4994815711055467527}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5650945413577909674
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 119363670582611774}
   m_Layer: 0
-  m_Name: Sniper 1
+  m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +232,6 @@ GameObject:
   - component: {fileID: 2149210983678965373}
   - component: {fileID: 4776672462924044804}
   - component: {fileID: 548457912966427367}
-  - component: {fileID: 7026266868710350164}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -327,19 +298,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7026266868710350164
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6391786326221599677}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7700041772952431347
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +309,6 @@ GameObject:
   - component: {fileID: 2344417821474119139}
   - component: {fileID: 4824631219372170096}
   - component: {fileID: 5492618036576034374}
-  - component: {fileID: 4442308063214836125}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -418,19 +375,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4442308063214836125
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7700041772952431347}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8324004608921747820
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +386,6 @@ GameObject:
   - component: {fileID: 4213296968251896068}
   - component: {fileID: 5095607282059867823}
   - component: {fileID: 2592760706197551213}
-  - component: {fileID: 8763142932994443236}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -509,20 +452,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &8763142932994443236
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8324004608921747820}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &8762198004682599714
 GameObject:
   m_ObjectHideFlags: 0
