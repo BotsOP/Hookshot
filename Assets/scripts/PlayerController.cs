@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("hit");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("hit!");

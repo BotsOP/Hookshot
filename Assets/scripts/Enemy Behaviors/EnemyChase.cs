@@ -24,7 +24,7 @@ public class EnemyChase : State
             //Vector3 lookAtTarget = new Vector3(0, _system.target.transform.position.y, 0);
             //_system.transform.LookAt(lookAtTarget);
             _system.agent.SetDestination(_system.target.transform.position);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.1f);
         }
         yield break;
     }

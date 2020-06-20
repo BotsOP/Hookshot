@@ -9,9 +9,11 @@ public class PlayerCameraController : MonoBehaviour
 
     private GameObject Player;
     public GameObject bullet;
+    public GameObject firepoint;
     public Vector2 smoothedVelocity;
     public Vector2 currentLookingPos;
     public Vector2 inputValues;
+    private Vector3 fireDirection;
 
     void Start()
     {
@@ -23,7 +25,6 @@ public class PlayerCameraController : MonoBehaviour
     void Update()
     {
         RotateCamera();
-        CheckForShooting();
     }
 
     private void RotateCamera()
@@ -55,15 +56,17 @@ public class PlayerCameraController : MonoBehaviour
     //    }
     //}
 
-    private void CheckForShooting()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit whatIHit;
-            if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
-            {
-                Instantiate(bullet, transform.position, transform.rotation);
-            }
-        }
-    }
+    //private void CheckForShooting()
+    //{
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        RaycastHit whatIHit;
+    //        if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
+    //        {
+    //            Debug.DrawRay(transform.position, transform.forward, Color.green, 20);
+    //            fireDirection = whatIHit.point - firepoint.transform.position;
+    //            Instantiate(bullet, firepoint.transform.position, Quaternion.LookRotation(fireDirection, Vector3.up));
+    //        }
+    //    }
+    //}
 }

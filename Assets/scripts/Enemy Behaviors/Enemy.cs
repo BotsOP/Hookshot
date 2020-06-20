@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IDamagable
     public float gameTimer;
     public int seconds = 0;
     public Vector3 wanderPos;
+    public Vector3 fireDirection;
     public bool hasTarget;
     public bool inRange;
     public float rotationSpeed = 5f;
@@ -34,8 +35,13 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public NavMeshAgent agent;
 
+    public Vector3 test = new Vector3(0, 90, 1);
+
+    public static float test2= 0.5f;
+
     void Start()
     {
+        new Vector3(0, test2, 1f);
         PlayerController.current.onTargetTrigger += TargetFound;
         currentHealth = enemyStats.maxHealth;
         SetHealthbarUI();
@@ -46,7 +52,8 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void TargetFound()
     {
-        Debug.Log("I received this event name: " + gameObject.name);
+
+        Debug.Log("I found the target: " + gameObject.name);
         target = GameObject.Find("Player");
         hasTarget = true;
         SetState(new EnemyChase(this));
@@ -54,6 +61,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     void Update()
     {
+        //Debug.DrawRay(transform.position, transform.TransformDirection(test), Color.green, 20);
         CheckIfEnemyInfront();
 
         if(inRange && target != null)
@@ -82,12 +90,13 @@ public class Enemy : MonoBehaviour, IDamagable
 
     }
 
+    public Vector3 rayInFront;
     public void CheckIfEnemyInfront()
     {
-        for (int i = -150; i < 150; i += 10)
+        for (float i = -0.5f; i < 1; i += 0.1f)
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow, rayCastDis);
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, rayCastDis))
+            Debug.DrawRay(transform.position, transform.TransformDirection(rayInFront), Color.yellow, rayCastDis);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(rayInFront), out hit, rayCastDis))
             {
                 if(hit.collider.gameObject.name == "Player" && !inRange)
                 {
@@ -97,12 +106,14 @@ public class Enemy : MonoBehaviour, IDamagable
                 }
                 
             }
+            rayInFront = new Vector3(0, i, 1);
         }
     }
 
     public void fireBullet()
     {
-        Instantiate(bullet, firePoint.transform.position, transform.rotation);
+        fireDirection = target.transform.position - firePoint.transform.position;
+        Instantiate(bullet, firePoint.transform.position, Quaternion.LookRotation(fireDirection, Vector3.up));
     }
 
     public void WanderAround()

@@ -19,8 +19,6 @@ public class EnemyAttack : State
         while (_system.inRange)
         {
             _system.agent.SetDestination(_system.transform.position);
-            Quaternion targetRotation = Quaternion.LookRotation(_system.target.transform.position - _system.transform.position);
-            _system.transform.rotation = Quaternion.Slerp(_system.transform.rotation, targetRotation, _system.rotationSpeed);
             Debug.Log("im going to shoot now");
             _system.fireBullet();
 
