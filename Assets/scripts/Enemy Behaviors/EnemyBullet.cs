@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     public float speed = 20;
-    public WeaponHandler weaponHandler;
-    private int gunDmg;
-    // Start is called before the first frame update
+    public int damage = 10;
     void Start()
     {
-        weaponHandler = GameObject.Find("WeaponHandler").GetComponent<WeaponHandler>();
-        gunDmg = weaponHandler.currentGun.maximumDmg;
         Destroy(gameObject, 5);
     }
 
@@ -24,15 +20,16 @@ public class bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamagable damageable = other.gameObject.GetComponent<IDamagable>();
-        if (other.CompareTag("Enemy") && other.GetType() == typeof(CapsuleCollider))
-        {
-            damageable.DealDamage(gunDmg);
-        }
-        if (other.gameObject.name != "Player" && other.GetType() != typeof(SphereCollider))
+        if (!other.CompareTag("Enemy") || other.GetType() != typeof(SphereCollider))
         {
             Destroy(gameObject);
         }
-        
+        if (other.gameObject.name == "Player" && other.GetType() == typeof(CapsuleCollider))
+        {
+            //damageable.DealDamage(damage);
+            Destroy(gameObject);
+        }
+
     }
 
 }

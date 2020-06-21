@@ -7,17 +7,20 @@ public class WeaponHandler : MonoBehaviour
     public List<Gun> guns = new List<Gun>();
 
     public Gun currentGun;
+    public int currentGunIndex;
     private Transform cameraTransform;
     private Vector3 fireDirection;
     private Transform FirePoint;
     private GameObject currentGunPrefab;
+    public int currentGunDmg;
 
     private void Start()
     {
         cameraTransform = Camera.main.transform;
         currentGunPrefab = Instantiate(guns[0].gunPrefab, transform);
         FirePoint = GameObject.Find("Firepoint" + guns[0].name).GetComponent<Transform>();
-        currentGun = guns[0];
+        currentGunIndex = 0;
+        currentGun = guns[currentGunIndex];
     }
 
     private void Update()
@@ -27,14 +30,16 @@ public class WeaponHandler : MonoBehaviour
         {
             Destroy(currentGunPrefab);
             currentGunPrefab = Instantiate(guns[0].gunPrefab, transform);
-            currentGun = guns[0];
+            currentGunIndex = 0;
+            currentGun = guns[currentGunIndex];
             FirePoint = GameObject.Find("Firepoint" + currentGun.name).GetComponent<Transform>();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Destroy(currentGunPrefab);
             currentGunPrefab = Instantiate(guns[1].gunPrefab, transform);
-            currentGun = guns[1];
+            currentGunIndex = 1;
+            currentGun = guns[currentGunIndex];
             FirePoint = GameObject.Find("Firepoint" + currentGun.name).GetComponent<Transform>();
         }
     }
@@ -43,15 +48,12 @@ public class WeaponHandler : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit whatIHit;
-            if (Physics.Raycast(cameraTransform.position, transform.forward, out whatIHit, Mathf.Infinity))
-            {
-                Debug.Log("I hit: " + whatIHit.collider.gameObject.name);
-                FirePoint = GameObject.Find("Firepoint" + currentGun.name).GetComponent<Transform>();
-                Debug.DrawRay(cameraTransform.position, transform.forward, Color.green, 20);
-                fireDirection = whatIHit.point - FirePoint.position;
-                Instantiate(currentGun.bullet, FirePoint.position, Quaternion.LookRotation(fireDirection, Vector3.up));
-            }
+            currentGun.OnMouseDown(cameraTransform, FirePoint);
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            currentGun.OnMouseHold(cameraTransform, FirePoint);
         }
     }
 }

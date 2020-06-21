@@ -13,7 +13,6 @@ public class DetectPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("test!!!!!!!!!!!!!!!!!!");
         if (other.gameObject.name == "Player")
         {
             Debug.Log("found player");

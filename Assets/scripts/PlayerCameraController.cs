@@ -14,6 +14,7 @@ public class PlayerCameraController : MonoBehaviour
     public Vector2 currentLookingPos;
     public Vector2 inputValues;
     private Vector3 fireDirection;
+    public float maxLookRotation = 85;
 
     void Start()
     {
@@ -36,37 +37,8 @@ public class PlayerCameraController : MonoBehaviour
 
         currentLookingPos += smoothedVelocity;
 
+        currentLookingPos.y = Mathf.Clamp(currentLookingPos.y, -maxLookRotation, maxLookRotation);
         transform.localRotation = Quaternion.AngleAxis(-currentLookingPos.y, Vector3.right);
         Player.transform.localRotation = Quaternion.AngleAxis(currentLookingPos.x, Player.transform.up);
     }
-
-    //private void CheckForShooting()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        RaycastHit whatIHit;
-    //        if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
-    //        {
-    //            IDamagable damageable = whatIHit.collider.GetComponent<IDamagable>();
-    //            if (damageable != null)
-    //            {
-    //                damageable.DealDamage(10);
-    //            }
-    //        }
-    //    }
-    //}
-
-    //private void CheckForShooting()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        RaycastHit whatIHit;
-    //        if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
-    //        {
-    //            Debug.DrawRay(transform.position, transform.forward, Color.green, 20);
-    //            fireDirection = whatIHit.point - firepoint.transform.position;
-    //            Instantiate(bullet, firepoint.transform.position, Quaternion.LookRotation(fireDirection, Vector3.up));
-    //        }
-    //    }
-    //}
 }

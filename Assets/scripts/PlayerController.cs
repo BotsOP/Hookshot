@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.GetType() == typeof(SphereCollider))
         {
-            Debug.Log("I hit an enemy detection range " + other.gameObject.name);
             PlayerController.current.TargetFound();
         }
     }

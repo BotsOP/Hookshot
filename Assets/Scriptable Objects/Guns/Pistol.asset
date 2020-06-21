@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8022746824d77440867e1df5595e913, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ce1eae1d75d5a64e849b30a152ff442, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
   gunName: Pistol
   gunPrefab: {fileID: 6571681167411264354, guid: 50abc55267b287541ad9a44cf9f24d14,
     type: 3}
   bullet: {fileID: 3281437693424416417, guid: e193a204acd89c748a45930944dd5bcb, type: 3}
-  minimumDmg: 5
-  maximumDmg: 20
+  minimumDmg: 1
+  maximumDmg: 100
   maximumRange: 25
+  currentGunDmg: 57
+  fireRate: 5

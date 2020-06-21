@@ -13,4 +13,15 @@ public class Gun : ScriptableObject
     public int minimumDmg;
     public int maximumDmg;
     public float maximumRange;
+    public int currentGunDmg = 1;
+
+    public virtual void OnMouseDown(Transform camera, Transform FirePoint)
+    {
+        
+    }
+
+    public virtual void OnMouseHold(Transform camera, Transform FirePoint)
+    {
+
+    }
 }

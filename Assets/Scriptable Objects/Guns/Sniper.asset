@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8022746824d77440867e1df5595e913, type: 3}
+  m_Script: {fileID: 11500000, guid: 51ba6668dd533f94da3dff3072cd5e8f, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: 
   gunName: Sniper
@@ -19,3 +19,6 @@ MonoBehaviour:
   minimumDmg: 60
   maximumDmg: 60
   maximumRange: 50
+  currentGunDmg: 60
+  fireRate: 1
+  canFire: 0
