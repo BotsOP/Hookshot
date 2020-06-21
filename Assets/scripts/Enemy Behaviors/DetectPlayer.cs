@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectPlayer : MonoBehaviour
+public class DetectPlayer : Enemy
 {
-    public Enemy enemy;
-
-    private void Start()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,9 +11,9 @@ public class DetectPlayer : MonoBehaviour
         {
             Debug.Log("found player");
 
-            enemy.target = other.gameObject;
-            enemy.hasTarget = true;
-            enemy.SetState(new EnemyChase(enemy));
+            target = other.gameObject;
+            hasTarget = true;
+            SetState(new EnemyChase(this));
         }
 
     }

@@ -6,6 +6,7 @@ public class WeaponHandler : MonoBehaviour
 {
     public List<Gun> guns = new List<Gun>();
 
+    private AmmunitionManager ammunitionManager;
     public Gun currentGun;
     public int currentGunIndex;
     private Transform cameraTransform;
@@ -16,6 +17,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void Start()
     {
+        ammunitionManager = AmmunitionManager.instance;
         cameraTransform = Camera.main.transform;
         currentGunPrefab = Instantiate(guns[0].gunPrefab, transform);
         FirePoint = GameObject.Find("Firepoint" + guns[0].name).GetComponent<Transform>();
@@ -50,8 +52,7 @@ public class WeaponHandler : MonoBehaviour
         {
             currentGun.OnMouseDown(cameraTransform, FirePoint);
         }
-
-        if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0))
         {
             currentGun.OnMouseHold(cameraTransform, FirePoint);
         }
