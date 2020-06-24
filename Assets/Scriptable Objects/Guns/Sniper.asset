@@ -16,6 +16,7 @@ MonoBehaviour:
   gunPrefab: {fileID: 5650945413577909674, guid: 6be400cf9a90c5645b76c7abe09df750,
     type: 3}
   bullet: {fileID: 3281437693424416417, guid: e193a204acd89c748a45930944dd5bcb, type: 3}
+  ammunitionType: 2
   minimumDmg: 60
   maximumDmg: 60
   maximumRange: 50

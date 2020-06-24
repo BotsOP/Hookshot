@@ -22,6 +22,7 @@ public class EnemyBullet : MonoBehaviour
         IDamagable damageable = other.gameObject.GetComponent<IDamagable>();
         if (!other.CompareTag("Enemy") || other.GetType() != typeof(SphereCollider))
         {
+            Debug.Log(other.GetComponent<Collider>().name);
             Destroy(gameObject);
         }
         if (other.gameObject.name == "Player" && other.GetType() == typeof(CapsuleCollider))

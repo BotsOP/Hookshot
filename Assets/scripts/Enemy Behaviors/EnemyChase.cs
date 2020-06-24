@@ -10,14 +10,13 @@ public class EnemyChase : State
 
     public override IEnumerator Start()
     {
-        Debug.Log("Im chasing rn");
         _system.Chase();
         yield break;
     }
 
     public override IEnumerator Chase()
     {
-        while (_system.hasTarget && !_system.inRange)
+        while (_system.hasTarget && !_system.inRange && _system.cantShoot)
         {
             Quaternion targetRotation = Quaternion.LookRotation(_system.target.transform.position - _system.transform.position);
             _system.transform.rotation = Quaternion.Slerp(_system.transform.rotation, targetRotation, _system.rotationSpeed);

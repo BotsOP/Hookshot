@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.GetType() == typeof(SphereCollider))
         {
-            PlayerController.current.TargetFound();
+            current.TargetFound();
         }
     }
 

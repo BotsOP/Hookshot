@@ -21,38 +21,44 @@ public class Enemy : MonoBehaviour, IDamagable
     public bool inRange;
     public float rotationSpeed = 5f;
     public float rayCastDis = 10f;
+    public bool cantShoot = true;
+    public int fireRate = 1;
+    public float lastTimeFired;
 
     public Color maxHealthColor;
     public Color minHealthColor;
     
     private State currentState;
+    public bool isEnemyChasing;
     
     RaycastHit hit;
     
     public GameObject bullet;
     public GameObject firePoint;
     public GameObject target;
+    public GameObject damageTextPrefab;
 
     public NavMeshAgent agent;
 
-    public Vector3 test = new Vector3(0, 90, 1);
-
-    public static float test2= 0.5f;
+    public static float test2 = 0.5f;
 
     void Start()
     {
-        new Vector3(0, test2, 1f);
         PlayerController.current.onTargetTrigger += TargetFound;
         currentHealth = enemyStats.maxHealth;
         SetHealthbarUI();
+        lastTimeFired = 0;
+        agent.speed = 2;
+
         SetState(new EnemyWander(this));
         WanderAround();
-        agent.speed = 2;
+
+        Debug.Log("this is the result " + Equals(new EnemyWander(this)));
     }
 
     private void TargetFound()
     {
-
+        PlayerController.current.onTargetTrigger -= TargetFound;
         Debug.Log("I found the target: " + gameObject.name);
         target = GameObject.Find("Player");
         hasTarget = true;
@@ -63,39 +69,14 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         //Debug.DrawRay(transform.position, transform.TransformDirection(test), Color.green, 20);
         CheckIfEnemyInfront();
-
-        if (inRange && target != null)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
-        }
+        turnToTarget();
     }
 
     public void SetState(State state)
     {
         currentState = state;
         StartCoroutine(currentState.Start());
-    }
-
-    public Vector3 rayInFront;
-    public void CheckIfEnemyInfront()
-    {
-        for (float i = -0.5f; i < 1; i += 0.1f)
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(rayInFront), Color.yellow, rayCastDis);
-            if (Physics.Raycast(transform.position, transform.TransformDirection(rayInFront), out hit, rayCastDis))
-            {
-                if(hit.collider.gameObject.name == "Player" && !inRange)
-                {
-                    inRange = true;
-                    SetState(new EnemyAttack(this));
-                    Attack();
-                }
-                
-            }
-            rayInFront = new Vector3(0, i, 1);
-        }
-    }
+    }    
 
     public void fireBullet()
     {
@@ -103,6 +84,15 @@ public class Enemy : MonoBehaviour, IDamagable
             return;
         fireDirection = target.transform.position - firePoint.transform.position;
         Instantiate(bullet, firePoint.transform.position, Quaternion.LookRotation(fireDirection, Vector3.up));
+    }
+
+    public void turnToTarget()
+    {
+        if (inRange && target != null)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
+        }
     }
 
     public void WanderAround()
@@ -123,6 +113,7 @@ public class Enemy : MonoBehaviour, IDamagable
     public void DealDamage(int damage)
     {
         currentHealth -= damage;
+        Instantiate(damageTextPrefab, transform.position, Quaternion.identity, transform).GetComponent<DamageText>().Initialise(damage);
         CheckIfDead();
         SetHealthbarUI();
     }
@@ -147,8 +138,29 @@ public class Enemy : MonoBehaviour, IDamagable
         return ((float)currentHealth / (float)enemyStats.maxHealth) * 100;
     }
 
+    public Vector3 rayInFront;
+    public void CheckIfEnemyInfront()
+    {
+        for (float i = -0.5f; i < 1; i += 0.5f)
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(rayInFront), Color.yellow, rayCastDis);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(rayInFront), out hit, rayCastDis))
+            {
+                if (hit.collider.gameObject.name == "Player" && inRange)
+                {
+                    SetState(new EnemyAttack(this));
+                    Attack();
+                }
+            }
+            rayInFront = new Vector3(0, i, 1);
+        }
+    }
+
     private void OnDestroy()
     {
         PlayerController.current.onTargetTrigger -= TargetFound;
     }
+
+    
 }
+

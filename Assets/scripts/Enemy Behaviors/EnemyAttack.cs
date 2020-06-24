@@ -10,23 +10,28 @@ public class EnemyAttack : State
 
     public override IEnumerator Start()
     {
-        Debug.Log("Im attacking rn");
         yield break;
     }
+
+    
 
     public override IEnumerator Attack()
     {
-        while (_system.inRange)
+        if (_system.inRange && (Time.time - _system.lastTimeFired > 1 / _system.fireRate))
         {
+            _system.lastTimeFired = Time.time;
+            Time.timeScale = 1f;
+            _system.cantShoot = true;
             _system.agent.SetDestination(_system.transform.position);
-            Debug.Log("im going to shoot now");
             _system.fireBullet();
-
-            yield return new WaitForSeconds(1f);
-            _system.inRange = false;
-            _system.SetState(new EnemyChase(_system));
         }
-        
+        _system.agent.SetDestination(_system.transform.position);
+        yield return new WaitForSecondsRealtime(1);
+        if(!_system.inRange)
+            _system.SetState(new EnemyChase(_system));
+
         yield break;
     }
+
+    
 }
