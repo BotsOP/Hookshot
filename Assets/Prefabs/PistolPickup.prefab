@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 8185872339454962276}
   - component: {fileID: 8144045620018573401}
   - component: {fileID: 5534558873293575082}
+  - component: {fileID: -2990555977162429713}
   m_Layer: 0
   m_Name: PistolPickup
   m_TagString: Untagged
@@ -91,6 +92,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.080769345, y: 0.27772903, z: 0.4541353}
   m_Center: {x: -0.002844334, y: 0.009677691, z: 0.076210685}
+--- !u!54 &-2990555977162429713
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8185872339454962279}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8185872340037245978
 GameObject:
   m_ObjectHideFlags: 0

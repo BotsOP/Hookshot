@@ -7,14 +7,14 @@ public class bullet : MonoBehaviour
     public float speed = 20;
     public WeaponHandler weaponHandler;
 
-    public Gun currentGun;
+    public Gun gun;
     private int gunDmg;
 
     void Start()
     {
         weaponHandler = GameObject.Find("WeaponHandler").GetComponent<WeaponHandler>();
-        currentGun = weaponHandler.guns[weaponHandler.currentGunIndex];
-        gunDmg = currentGun.currentGunDmg;
+        gun = weaponHandler.currentGun;
+        gunDmg = gun.currentGunDmg;
         Destroy(gameObject, 5);
     }
 

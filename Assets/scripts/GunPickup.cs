@@ -12,7 +12,8 @@ public class GunPickup : MonoBehaviour, ILootable
     }
     public void OnInteract()
     {
-        Debug.Log("trying to pickup " + gun.gunName);
+        WeaponHandler.instance.PickupGun(gun);
+        Destroy(gameObject);
     }
     public void OnEndLook()
     {

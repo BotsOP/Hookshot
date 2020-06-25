@@ -13,12 +13,12 @@ public class Automatic : Gun
         lastTimeFired = 0;
     }
 
-    public override void OnMouseHold(Transform camera, Transform FirePoint)
+    public override void OnMouseHold(Transform camera)
     {
         if (Time.time - lastTimeFired > 1 / fireRate)
         {
             lastTimeFired = Time.time;
-            Fire(camera, FirePoint);
+            Fire(camera);
         }
         
     }

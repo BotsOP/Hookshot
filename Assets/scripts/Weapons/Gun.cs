@@ -8,6 +8,7 @@ public class Gun : ScriptableObject
     public string gunName;
     public GameObject gunPrefab;
     public GameObject bullet;
+    public GameObject gunPickup;
 
     [Header("Stats")]
     public AmmunitionTypes ammunitionType;
@@ -16,10 +17,11 @@ public class Gun : ScriptableObject
     public float maximumRange;
     public int currentGunDmg = 1;
 
-    protected void Fire(Transform camera, Transform FirePoint)
+    protected void Fire(Transform camera)
     {
         if (AmmunitionManager.instance.ConsumeAmmo(ammunitionType))
         {
+            Transform FirePoint = GameObject.Find("Firepoint" + gunName).GetComponent<Transform>();
             RaycastHit whatIHit;
             if (Physics.Raycast(camera.position, camera.forward, out whatIHit, Mathf.Infinity))
             {
@@ -35,7 +37,7 @@ public class Gun : ScriptableObject
         }
     }
 
-    public virtual void OnMouseDown(Transform camera, Transform FirePoint) { }
+    public virtual void OnMouseDown(Transform camera) { }
 
-    public virtual void OnMouseHold(Transform camera, Transform FirePoint) { }
+    public virtual void OnMouseHold(Transform camera) { }
 }

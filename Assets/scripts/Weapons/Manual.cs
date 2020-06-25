@@ -14,7 +14,7 @@ public class Manual : Gun
         lastTimeFired = 0;
     }
 
-    public override void OnMouseDown(Transform camera, Transform FirePoint)
+    public override void OnMouseDown(Transform camera)
     {
         Debug.Log(Time.time + "                " + lastTimeFired);
         if (Time.time - lastTimeFired > 1 / fireRate)
@@ -24,7 +24,7 @@ public class Manual : Gun
         }
         if (canFire)
         {
-            Fire(camera, FirePoint);
+            Fire(camera);
             canFire = false;
         }
         
